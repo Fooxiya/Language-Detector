@@ -1,0 +1,4 @@
+{
+  "model_path": "/home/larisa/dev/models/bert-base-multilingual-cased-language-detection/",
+  "threshold": 0.8
+}
