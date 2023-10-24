@@ -1,7 +1,7 @@
 import json
 from typing import Dict, List
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from language_detector import LanguageDetector
@@ -32,7 +32,10 @@ async def get_languages() -> List[str]:
 
 @app.post("/detect")
 def detect(text_input: Text) -> DetectionResult:
-    t1_start = perf_counter()
-    result = lang_detector.classify(text_input.text)
-    t1_stop = perf_counter()
-    return DetectionResult(result=result, time=int((t1_stop - t1_start) * 1000))
+    try:
+        t1_start = perf_counter()
+        result = lang_detector.classify(text_input.text)
+        t1_stop = perf_counter()
+        return DetectionResult(result=result, time=int((t1_stop - t1_start) * 1000))
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
