@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "language-detector"
+version = "0.1.0"
+description = "Larisa's demo project"
+authors = ["Larisa Furletova <Fooxiya@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.0"
+uvicorn = "^0.23.2"
+torch = "^2.1.0"
+transformers = "^4.34.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
