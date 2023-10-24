@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from language_detector import LanguageDetector
+from time import perf_counter
 
 
 class Text(BaseModel):
@@ -13,6 +14,7 @@ class Text(BaseModel):
 
 class DetectionResult(BaseModel):
     result: Dict[str, float]
+    time: int
 
 
 app = FastAPI()
@@ -30,4 +32,7 @@ async def get_languages() -> List[str]:
 
 @app.post("/detect")
 def detect(text_input: Text) -> DetectionResult:
-    return DetectionResult(result=lang_detector.classify(text_input.text))
+    t1_start = perf_counter()
+    result = lang_detector.classify(text_input.text)
+    t1_stop = perf_counter()
+    return DetectionResult(result=result, time=int((t1_stop - t1_start) * 1000))
