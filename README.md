@@ -90,3 +90,24 @@ If you want to run the service as Docker daemon then you need to pass special fl
 ```shell
 docker run --restart=always -d --rm -v full_path_to_model:/language_detector/model --network=host language_detector
 ```
+
+
+# Running Locally
+
+## Prerequisites
+
+Download the model locally. (see aforementioned location)
+Modify `config.json` to point to the location of your model on your computer.
+
+
+## install with Poetry
+
+```shell
+poetry install
+```
+
+## run with Poetry
+
+```shell
+poetry run uvicorn main:app --reload
+```shell
